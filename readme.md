@@ -148,11 +148,10 @@ class MovieDetailViewModel @Inject constructor(
 
 ## Screenshots
 
-### Movie List Screen
-![Movie List](app/screenshots/movie_list.png)
+| Movie List | Movie Detail |
+|------------|--------------|
+| <img src="app/screenshots/movie_list.png" alt="Movie List" width="300"/> | <img src="app/screenshots/movie_detail.png" alt="Movie Detail" width="300"/> |
 
-### Movie Detail Screen
-![Movie Detail](app/screenshots/movie_detail.png)
 
 ---
 
