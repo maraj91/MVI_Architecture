@@ -70,13 +70,66 @@ The app follows **Clean Architecture** principles and the **MVI pattern**, ensur
    - Handles business logic  
    - Calls **Repository** to fetch data  
 
-4. **Repository Handling**  
-   - Checks cache or network  
-   - Maps DTOs to **Domain Models**  
+4. **UI Updates**
 
-5. **UI Update**  
-   - **State** updated in ViewModel (`Success`, `Error`)  
-   - Compose UI observes State and renders accordingly  
+- Compose observes `state` via `collectAsState()`
+- Re-composes automatically when state changes
+- Shows loading, error, or data UI
+
+#### Example: Loading Movies on Screen with State
+
+```kotlin
+@Composable
+fun MovieListScreen(
+    viewModel: MovieListViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsState()
+
+    // Load default movies when screen appears
+    LaunchedEffect(key1 = true) {
+        if (state.movies.isEmpty()) {
+            viewModel.handleIntent(MovieListIntent.LoadDefaultMovies)
+        }
+    }
+
+    when {
+        state.isLoading -> Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) { CircularProgressIndicator() }
+
+        state.error != null -> Text("Error: ${state.error}")
+
+        else -> LazyColumn {
+            items(state.movies) { movie ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { /* Navigate to movie detail */ }
+                        .padding(8.dp)
+                ) {
+                    AsyncImage(
+                        model = movie.poster,
+                        contentDescription = movie.title,
+                        modifier = Modifier.size(80.dp)
+                    )
+                    Spacer(Modifier.width(8.dp))
+                    Column {
+                        Text(movie.title, style = MaterialTheme.typography.titleMedium)
+                        Text(movie.year, style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+            }
+        }
+    }
+}
+```
+#### Key Points:
+
+- state is observed reactively using collectAsState()
+- LaunchedEffect(key1 = true) ensures one-time execution on composition
+- Repository decides whether to fetch from cache or network
+- DTOs are mapped to Domain Models to keep UI layer decoupled
 
 ---
 
