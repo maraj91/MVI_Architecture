@@ -1,5 +1,8 @@
 package com.example.mvi_architecture.presentaion.moview_list
 
+import com.example.mvi_architecture.R
+import androidx.compose.ui.res.stringResource
+
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -98,7 +101,7 @@ fun MovieListScreen(
                         }
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
-                    Text("Search")
+                    Text(stringResource(R.string.search_button))
                 }
             }
         }
@@ -110,7 +113,7 @@ fun MovieListScreen(
                 contentAlignment = Alignment.Center
             ) { CircularProgressIndicator() }
 
-            state.error != null -> Text("Error: ${state.error}")
+            state.error != null -> Text(stringResource(id = R.string.error_prefix, state.error ?: stringResource(id = R.string.error_unknown)))
 
             else -> LazyColumn {
                 items(state.movies) { movie ->   // ✅ movie is your Movie object

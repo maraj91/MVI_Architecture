@@ -1,5 +1,8 @@
 package com.example.mvi_architecture.presentaion.moview_detail
 
+import com.example.mvi_architecture.R
+import androidx.compose.ui.res.stringResource
+
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -59,7 +62,10 @@ fun MovieDetailScreen(
                 Text(movie.plot, style = MaterialTheme.typography.bodyMedium)
                 Spacer(Modifier.height(8.dp))
                 movie.ratings.forEach { rating ->
-                    Text("${rating.source}: ${rating.value}", style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        stringResource(id = R.string.rating_format, rating.source, rating.value),
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                 }
             }
         }

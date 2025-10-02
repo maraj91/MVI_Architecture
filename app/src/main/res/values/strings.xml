@@ -1,3 +1,25 @@
 <resources>
+    <!-- App Name -->
     <string name="app_name">MVI_Architecture</string>
+
+    <!-- Errors -->
+    <string name="error_unknown">Unknown error</string>
+    <string name="error_prefix">Error: %1$s</string>
+    
+    <!-- Movie List Screen -->
+    <string name="movie_list_title">Movie List</string>
+    <string name="search_hint">Search</string>
+    <string name="search_button">Search</string>
+    
+    <!-- Movie Detail Screen -->
+    <string name="director_label">Director: %1$s</string>
+    <string name="actors_label">Actors: %1$s</string>
+    <string name="rating_format">%1$s: %2$s</string>
+    
+    <!-- API -->
+    <string name="base_url">https://www.omdbapi.com/</string>
+    <string name="default_search_query">batman</string>
+    
+    <!-- Movie Fields -->
+    <string name="movie_genre_format">%1$s | %2$s | %3$s</string>
 </resources>
